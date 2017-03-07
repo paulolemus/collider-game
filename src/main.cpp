@@ -15,6 +15,8 @@
 #include "Paddle.h"
 #include "Ball.h"
 
+#include "paddle1_move.h"
+#include "paddle2_move.h"
 
 Mix_Music *gMusic = nullptr;
 Mix_Chunk *gScratch = nullptr;
@@ -62,7 +64,7 @@ int main(int argc, char** argv) {
   }
 
   // Load the music.
-  gMusic = Mix_LoadMUS("sound/Vortex Infinitum (Robo-Ky's Theme).mp3");
+  gMusic = Mix_LoadMUS("sound/Star Wars - John Williams - Duel Of The Fates.mp3");
   gScratch = Mix_LoadWAV("sound/scratch.wav");
   gHigh = Mix_LoadWAV("sound/high.wav");
   gMedium = Mix_LoadWAV("sound/medium.wav");
@@ -166,6 +168,25 @@ int main(int argc, char** argv) {
     if (keys[SDL_SCANCODE_R]) {
       p1score = 0;
       p2score = 0;
+    }
+
+    int move_p1 = paddle1_move(delta.count(), p1, p2, ball);
+    int move_p2 = paddle2_move(delta.count(), p1, p2, ball);
+
+    if (move_p1 == 1) {
+      p1.set_speed(0, 60000 * delta.count());
+    } else if (move_p1 == -1) {
+      p1.set_speed(0, -60000 * delta.count());
+    } else if (move_p1 == 0) {
+      p2.set_speed(0, 0);
+    }
+
+    if (move_p2 == 1) {
+      p2.set_speed(0, 60000 * delta.count());
+    } else if (move_p2 == -1) {
+      p2.set_speed(0, -60000 * delta.count());
+    } else if (move_p2 == 0) {
+      p2.set_speed(0, 0);
     }
 
     // Update the balls.
