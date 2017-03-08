@@ -236,7 +236,8 @@ int main(int argc, char** argv) {
       speed = -speed;
     }
     speed = std::sqrt(speed);
-    int volume = static_cast<int>(speed / 4000.0 * 128);
+    int volume = static_cast<int>((speed / 2000.0) * 128.0);
+    
 
     // Set the volume according to the music.
     Mix_VolumeMusic(volume);

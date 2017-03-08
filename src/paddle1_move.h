@@ -7,7 +7,7 @@ int paddle1_move(
     const Paddle p2,
     const Ball ball
 ) {
-    return -1;
+    return -2;
 }
 
 #endif // COLLIDER_PADDLE1_MOVE_H
