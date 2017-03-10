@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
   }
 
   // Load the music.
-  gMusic = Mix_LoadMUS("sound/Star Wars - John Williams - Duel Of The Fates.mp3");
+  gMusic = Mix_LoadMUS("sound/music.mp3");
   gScratch = Mix_LoadWAV("sound/scratch.wav");
   gHigh = Mix_LoadWAV("sound/high.wav");
   gMedium = Mix_LoadWAV("sound/medium.wav");
@@ -94,6 +94,13 @@ int main(int argc, char** argv) {
 
   // Start playing the music.
   Mix_PlayMusic(gMusic, -1);
+
+  auto switch_t1 = std::chrono::high_resolution_clock::now();
+  auto switch_t2 = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<float> switch_delta = t2-t1;
+
+  void* paddle1_data = NULL; 
+  void* paddle2_data = NULL; 
 
   // Main loop.
   while(!done) {
@@ -150,13 +157,27 @@ int main(int argc, char** argv) {
       p2.set_speed(0, 0);
     }
 
+    switch_t1 = switch_t2;
+    switch_t2 = std::chrono::high_resolution_clock::now();
+    switch_delta += switch_t2-switch_t1;
+
+    auto switch_duration = std::chrono::duration_cast<std::chrono::milliseconds>(switch_delta);
+
     // Pressing space or enter changes the ball acceleration randomly.
     if (keys[SDL_SCANCODE_SPACE]) {
-      ball.set_accel(std::rand() % 300 - 150, std::rand() % 300 - 150);
+      if (switch_duration.count() > 5000) {
+        ball.inv_speed(true, true);
+        ball.set_accel(std::rand() % 300 - 150, std::rand() % 300 - 150);
+        switch_delta = std::chrono::duration<float>::zero();
+      }
     }
 
     if (keys[SDL_SCANCODE_KP_ENTER]) {
-      ball.set_accel(std::rand() % 300 - 150, std::rand() % 300 - 150);
+      if (switch_duration.count() > 5000) {
+        ball.inv_speed(true, true);
+        ball.set_accel(std::rand() % 300 - 150, std::rand() % 300 - 150);
+        switch_delta = std::chrono::duration<float>::zero();
+      }
     }
 
     if (keys[SDL_SCANCODE_ESCAPE]) {
@@ -170,8 +191,8 @@ int main(int argc, char** argv) {
       p2score = 0;
     }
 
-    int move_p1 = paddle1_move(delta.count(), p1, p2, ball);
-    int move_p2 = paddle2_move(delta.count(), p1, p2, ball);
+    int move_p1 = paddle1_move(delta.count(), p1, p2, ball, paddle1_data);
+    int move_p2 = paddle2_move(delta.count(), p1, p2, ball, paddle2_data);
 
     if (move_p1 == 1) {
       p1.set_speed(0, 60000 * delta.count());
@@ -236,7 +257,7 @@ int main(int argc, char** argv) {
       speed = -speed;
     }
     speed = std::sqrt(speed);
-    int volume = static_cast<int>((speed / 2000.0) * 128.0);
+    int volume = static_cast<int>((speed / 2000.0) * 128.0 + 26.0);
     
 
     // Set the volume according to the music.

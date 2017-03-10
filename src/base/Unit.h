@@ -54,9 +54,9 @@ public:
   void inv_speed(bool x, bool y);
   void inv_accel(bool x, bool y);
 
-  inline const vec2& get_pos() {return pos;}
-  inline const vec2& get_speed() {return speed;}
-  inline const vec2& get_accel() {return accel;}
+  inline const vec2& get_pos() const {return pos;}
+  inline const vec2& get_speed() const {return speed;}
+  inline const vec2& get_accel() const {return accel;}
 
   virtual void update(float delta);
   
