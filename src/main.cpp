@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
 
   auto switch_t1 = std::chrono::high_resolution_clock::now();
   auto switch_t2 = std::chrono::high_resolution_clock::now();
-  std::chrono::duration<float> switch_delta = t2-t1;
+  std::chrono::duration<float> switch_delta = std::chrono::duration<float>(std::chrono::seconds(5));
 
   void* paddle1_data = NULL; 
   void* paddle2_data = NULL; 
