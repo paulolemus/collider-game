@@ -199,7 +199,7 @@ int main(int argc, char** argv) {
     } else if (move_p1 == -1) {
       p1.set_speed(0, -60000 * delta.count());
     } else if (move_p1 == 0) {
-      p2.set_speed(0, 0);
+      p1.set_speed(0, 0);
     }
 
     if (move_p2 == 1) {
