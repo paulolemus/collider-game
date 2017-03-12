@@ -1,20 +1,19 @@
-LIBRARY_ARCH_FOLDER := x86_64-w64-mingw32
+#LIBRARY_ARCH_FOLDER := x86_64-w64-mingw32
 
-INCLUDE_DIRS := -I$(dirs $(wildcard src/**/)) \
-				-Isrc/ \
-				-Idep/SDL2/$(LIBRARY_ARCH_FOLDER)/include \
-				-Idep/SDL2/$(LIBRARY_ARCH_FOLDER)/include/SDL2 \
-				-Idep/SDL2_image/$(LIBRARY_ARCH_FOLDER)/include \
-				-Idep/SDL2_ttf/$(LIBRARY_ARCH_FOLDER)/include \
-				-Idep/SDL2_mixer/$(LIBRARY_ARCH_FOLDER)/include \
+#INCLUDE_DIRS := -I$(dirs $(wildcard src/**/)) \
+#				-Isrc/ \
+#				-Idep/SDL2/$(LIBRARY_ARCH_FOLDER)/include \
+#				-Idep/SDL2/$(LIBRARY_ARCH_FOLDER)/include/SDL2 \
+#				-Idep/SDL2_image/$(LIBRARY_ARCH_FOLDER)/include \
+#				-Idep/SDL2_ttf/$(LIBRARY_ARCH_FOLDER)/include \
+#				-Idep/SDL2_mixer/$(LIBRARY_ARCH_FOLDER)/include \
 
-LIBRARY_DIRS := -Ldep/SDL2/$(LIBRARY_ARCH_FOLDER)/lib \
-				-Ldep/SDL2_image/$(LIBRARY_ARCH_FOLDER)/lib \
-				-Ldep/SDL2_ttf/$(LIBRARY_ARCH_FOLDER)/lib \
-				-Ldep/SDL2_mixer/$(LIBRARY_ARCH_FOLDER)/lib 
+#LIBRARY_DIRS := -Ldep/SDL2/$(LIBRARY_ARCH_FOLDER)/lib \
+#				-Ldep/SDL2_image/$(LIBRARY_ARCH_FOLDER)/lib \
+#				-Ldep/SDL2_ttf/$(LIBRARY_ARCH_FOLDER)/lib \
+#				-Ldep/SDL2_mixer/$(LIBRARY_ARCH_FOLDER)/lib 
 
-LIBRARY_FILES := -lmingw32 \
-				 -lSDL2main \
+LIBRARY_FILES := -lSDL2main \
 				 -lSDL2 \
 				 -lSDL2_image \
 				 -lSDL2_ttf \

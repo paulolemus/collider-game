@@ -8,8 +8,6 @@
 // - Ball
 
 
-
-
 // - Optional void*& that you can use to hold data between frames.
 
 
@@ -66,19 +64,6 @@ int paddle1_move(
         else if(ball.get_pos().y < p1.get_pos().y) return -1;
         else return 0;
     }
-
-
-    /*
-       if (ball.get_speed().y != 0) {
-       if (ball.get_pos().y > p1.get_pos().y) {
-       return 1;
-       } else if (ball.get_pos().y < p1.get_pos().y) {
-       return -1;
-       } else {
-       return 0;
-       }
-       }
-       */
 }
 
 #endif // COLLIDER_PADDLE1_MOVE_H

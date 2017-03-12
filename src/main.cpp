@@ -18,11 +18,11 @@
 #include "paddle1_move.h"
 #include "paddle2_move.h"
 
-Mix_Music *gMusic = nullptr;
-Mix_Chunk *gScratch = nullptr;
-Mix_Chunk *gHigh = nullptr;
-Mix_Chunk *gMedium = nullptr;
-Mix_Chunk *gLow = nullptr;
+///Mix_Music *gMusic = nullptr;
+///Mix_Chunk *gScratch = nullptr;
+///Mix_Chunk *gHigh = nullptr;
+///Mix_Chunk *gMedium = nullptr;
+///Mix_Chunk *gLow = nullptr;
 
 int check_ball(Ball& ball) {
   if (ball.get_pos().x < 8) {
@@ -58,17 +58,17 @@ int main(int argc, char** argv) {
   SDL_Texture* text_texture;
 
   // Initialize the audio channel.
-  if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-    std::cout << "SDL_mixer could not initialize! SDL_mixer error: " << Mix_GetError() << std::endl;
-    throw std::runtime_error(Mix_GetError());
-  }
+  ///if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+  ///  std::cout << "SDL_mixer could not initialize! SDL_mixer error: " << Mix_GetError() << std::endl;
+  ///  throw std::runtime_error(Mix_GetError());
+  ///}
 
   // Load the music.
-  gMusic = Mix_LoadMUS("sound/music.mp3");
-  gScratch = Mix_LoadWAV("sound/scratch.wav");
-  gHigh = Mix_LoadWAV("sound/high.wav");
-  gMedium = Mix_LoadWAV("sound/medium.wav");
-  gLow = Mix_LoadWAV("sound/low.wav");
+  ///gMusic = Mix_LoadMUS("sound/music.mp3");
+  ///gScratch = Mix_LoadWAV("sound/scratch.wav");
+  ///gHigh = Mix_LoadWAV("sound/high.wav");
+  ///gMedium = Mix_LoadWAV("sound/medium.wav");
+  ///gLow = Mix_LoadWAV("sound/low.wav");
 
   // Set the renderer draw mode.
   SDL_SetRenderDrawBlendMode(base_system.get_renderer(), SDL_BLENDMODE_BLEND);
@@ -93,7 +93,7 @@ int main(int argc, char** argv) {
   const auto * keys = SDL_GetKeyboardState(NULL);
 
   // Start playing the music.
-  Mix_PlayMusic(gMusic, -1);
+  ///Mix_PlayMusic(gMusic, -1);
 
   auto switch_t1 = std::chrono::high_resolution_clock::now();
   auto switch_t2 = std::chrono::high_resolution_clock::now();
@@ -228,7 +228,7 @@ int main(int argc, char** argv) {
       ball.inv_speed(true, false);
       ball.add_speed(std::rand() % speedx - speedx / 2, p1.get_speed().y);
       ball.update(remaining_time * delta.count());
-      Mix_PlayChannel(-1, gHigh, 0);
+      ///Mix_PlayChannel(-1, gHigh, 0);
       std::cout << "P1\n";
       std::cout << "RIGHT COLLISION TIME: " << collision_info.z << std::endl;
     } else {
@@ -242,7 +242,7 @@ int main(int argc, char** argv) {
         ball.inv_speed(true, false);
         ball.add_speed(std::rand() % speedx - speedx/2, p2.get_speed().y);
         ball.update(remaining_time * delta.count());
-        Mix_PlayChannel(-1, gLow, 0);
+        ///Mix_PlayChannel(-1, gLow, 0);
         std::cout << "P2\n";
         std::cout << "LEFT COLLISION TIME: " << collision_info.z << std::endl;
       } else {
@@ -261,7 +261,7 @@ int main(int argc, char** argv) {
     
 
     // Set the volume according to the music.
-    Mix_VolumeMusic(volume);
+    ///Mix_VolumeMusic(volume);
     
     if(check_ball(ball) > 0) {
       //P2 SCORES
@@ -269,14 +269,14 @@ int main(int argc, char** argv) {
       ball.set_pos(1280/2 - 8, 720/2 - 8);
       ball.set_speed(0,0);
       ball.set_accel(0,0);
-      Mix_PlayChannel(-1, gScratch, 0);
+      ///Mix_PlayChannel(-1, gScratch, 0);
     } else if (check_ball(ball) < 0) {
       //P1 SCORES
       ++p1score;
       ball.set_pos(1280/2 - 8, 720/2 - 8);
       ball.set_speed(0,0);
       ball.set_accel(0,0);
-      Mix_PlayChannel(-1, gScratch, 0);
+      ///Mix_PlayChannel(-1, gScratch, 0);
     }
 
     // Create the score string.
@@ -323,17 +323,17 @@ int main(int argc, char** argv) {
   }
 
   // Free the music and the sound effects.
-  Mix_FreeChunk(gScratch);
-  Mix_FreeChunk(gHigh);
-  Mix_FreeChunk(gMedium);
-  Mix_FreeChunk(gLow);
-  gScratch = nullptr;
-  gHigh = nullptr;
-  gMedium = nullptr;
-  gLow = nullptr;
+  ///Mix_FreeChunk(gScratch);
+  ///Mix_FreeChunk(gHigh);
+  ///Mix_FreeChunk(gMedium);
+  ///Mix_FreeChunk(gLow);
+  ///gScratch = nullptr;
+  ///gHigh = nullptr;
+  ///gMedium = nullptr;
+  ///gLow = nullptr;
 
-  Mix_FreeMusic(gMusic);
-  gMusic = nullptr;
+  ///Mix_FreeMusic(gMusic);
+  ///gMusic = nullptr;
 
 
   return 0;
